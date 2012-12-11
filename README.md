@@ -1,4 +1,4 @@
-Loengute Reitimine
+Loengute reitimine
 =================
 
 Võrgurakendused II teine projekt
