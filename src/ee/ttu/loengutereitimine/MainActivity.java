@@ -1,6 +1,5 @@
 package ee.ttu.loengutereitimine;
 
-import ee.ttu.loengutereitimine.R;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
