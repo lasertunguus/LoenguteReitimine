@@ -1,10 +1,12 @@
 Loengute reitmine
 =================
 
-Võrgurakendused II teine praktikum
+Vï¿½rgurakendused II teine praktikum
 
 Veixi kirje!
 
 Ma muutsin midagi!
 
-Ma muutsin ka nüüd!
+Ma muutsin ka nï¿½ï¿½d!
+
+Veel siin Ã¼ks muudatus.
