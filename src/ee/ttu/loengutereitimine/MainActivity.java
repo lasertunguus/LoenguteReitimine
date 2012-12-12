@@ -2,6 +2,7 @@ package ee.ttu.loengutereitimine;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,19 +46,19 @@ public class MainActivity extends FragmentActivity implements
 				.setTabListener(this));
 		
 		ListView listView = (ListView) findViewById(R.id.mylist);
-		String[] values = new String[] { "IABB-51", "IAPB-51", "IABB-52"};
-		// First paramenter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the View to which the data is written
-		// Forth - the Array of data
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		listView.setAdapter(adapter);
+		ListAdapter listAdapter = createAdapter();
+		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				if(position==0){
+					startActivity(new Intent(view.getContext(), proov.class));
+					
+				}
+
 				String aine = ((TextView)view).getText().toString();
 				Toast.makeText(getApplicationContext(),
 						"Õppekava " + aine , Toast.LENGTH_SHORT)
@@ -66,6 +68,17 @@ public class MainActivity extends FragmentActivity implements
 		});
 	}
 
+	protected ListAdapter createAdapter()
+    {
+    	// Create some mock data
+    	String[] oppekavad = new String[] { "IABB-51", "IAPB-51", "IABB-52"};
+ 
+    	// Create a simple array adapter (of type string) with the test values
+    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, oppekavad);
+ 
+    	return adapter;
+    }
+	
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// Restore the previously serialized current tab position.
