@@ -57,8 +57,9 @@ public class MainActivity extends FragmentActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				String aine = ((TextView)view).getText().toString();
 				Toast.makeText(getApplicationContext(),
-						"Õppekava " + id, Toast.LENGTH_SHORT)
+						"Õppekava " + aine , Toast.LENGTH_SHORT)
 						.show();
 			
 			}
