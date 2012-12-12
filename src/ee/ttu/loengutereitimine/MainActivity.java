@@ -35,7 +35,7 @@ public class MainActivity extends TabActivity{
 		tabHost.addTab(otsi);
 		tabHost.addTab(oppekavad);
 		
-		tabHost.setCurrentTab(0);
+		tabHost.setCurrentTab(1);
 	}
 
 	}
