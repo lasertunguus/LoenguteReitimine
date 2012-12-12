@@ -30,7 +30,7 @@ public class MainActivity extends TabActivity{
 		TabSpec oppekavad = tabHost
 		  .newTabSpec("Täna lõppenud")
 		  .setContent(intentLoppenud);
-		otsi.setIndicator("Täna lõppenud");
+		oppekavad.setIndicator("Täna lõppenud");
 		
 		tabHost.addTab(otsi);
 		tabHost.addTab(oppekavad);
