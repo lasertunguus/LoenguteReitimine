@@ -44,9 +44,7 @@ public class MainActivity extends FragmentActivity implements
 				.setTabListener(this));
 		
 		ListView listView = (ListView) findViewById(R.id.mylist);
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-				"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-				"Linux", "OS/2" };
+		String[] values = new String[] { "IABB-51", "IAPB-51", "IABB-52"};
 		// First paramenter - Context
 		// Second parameter - Layout for the row
 		// Third parameter - ID of the View to which the data is written
@@ -60,8 +58,9 @@ public class MainActivity extends FragmentActivity implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
+						"Õppekava " + id, Toast.LENGTH_SHORT)
 						.show();
+			
 			}
 		});
 	}
