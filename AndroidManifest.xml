@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-             android:name="ee.ttu.loengutereitimine.proov">
-        </activity>    
+        <activity android:name="proov"></activity>
+		<activity android:name="oppekavad"></activity>
+		<activity android:name="otsi"></activity>
     </application>
 
 </manifest>
