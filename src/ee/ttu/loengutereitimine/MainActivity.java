@@ -1,12 +1,15 @@
 package ee.ttu.loengutereitimine;
 
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-public class MainActivity extends TabActivity {
+
+
+public class MainActivity extends TabActivity{
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
