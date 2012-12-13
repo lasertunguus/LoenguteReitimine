@@ -8,19 +8,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-		android:layout_alignBaseline="@+id/oppeaine"
+		android:layout_alignBaseline="@id/oppeaine"
         android:textSize="28dip"
-        android:textStyle="bold"
-        android:text="3.5" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/oppeaine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/kellaaeg"
+        android:layout_below="@id/kellaaeg"
         android:layout_marginTop="2dp"
-        android:layout_alignLeft="@+id/kellaaeg"
-        android:text="Informaatika II"
+        android:layout_alignLeft="@id/kellaaeg"
         android:textSize="18dip"
         android:textStyle="bold" />
 
@@ -31,7 +29,6 @@
         android:layout_alignParentLeft="true"
 		android:layout_alignBaseline="@id/oppeaine"
 		android:layout_marginLeft="5dp"
-        android:text="IDU0111"
         android:textSize="15dip" />
 
     <TextView
@@ -40,8 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/oppeaine"
         android:layout_marginTop="2dp"
-        android:layout_alignLeft="@id/oppeaine"
-        android:text="Tanel Tammet" />
+        android:layout_alignLeft="@id/oppeaine"/>
 
     <TextView
         android:id="@+id/kellaaeg"
@@ -49,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/ainekood"
-        android:text="18:00 - 20:00"
         android:textSize="15dip" />
     
 </RelativeLayout>

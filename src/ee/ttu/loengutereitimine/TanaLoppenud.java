@@ -22,6 +22,8 @@ public class TanaLoppenud extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tana_loppenud_layout);
         
+        loengud = new ArrayList<HashMap<String,String>>();
+        
 		ListView listView = (ListView) findViewById(R.id.mylist);
 		ListAdapter listAdapter = createAdapter();
 		listView.setAdapter(listAdapter);
