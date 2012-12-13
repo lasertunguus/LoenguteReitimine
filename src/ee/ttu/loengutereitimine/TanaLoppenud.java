@@ -81,11 +81,9 @@ public class TanaLoppenud extends Activity{
 		loengud.add(map2);
 		
     	// Create a simple array adapter (of type string) with the test values
-    	ListAdapter adapter = new SimpleAdapter(this, loengud, android.R.layout.simple_list_item_1, 
+    	ListAdapter adapter = new SimpleAdapter(this, loengud, R.layout.oppeaine, 
     			new String[]{"oppeaine", "ainekood", "oppejoud", "kellaaeg", "raiting"}, 
     			new int[]{R.id.oppeaine,R.id.ainekood,R.id.oppejoud,R.id.kellaaeg,R.id.rating});
-    			
-//    			(this, android.R.layout.simple_list_item_1, loengud);
  
     	return adapter;
     }
