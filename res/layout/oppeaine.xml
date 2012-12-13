@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-		android:layout_alignBaseline="@id/oppeaine"
+		android:layout_alignBaseline="@+id/oppeaine"
         android:textSize="28dip"
         android:textStyle="bold"
         android:text="3.5" />
@@ -17,9 +17,9 @@
         android:id="@+id/oppeaine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/kellaaeg"
+        android:layout_below="@+id/kellaaeg"
         android:layout_marginTop="2dp"
-        android:layout_alignLeft="@id/kellaaeg"
+        android:layout_alignLeft="@+id/kellaaeg"
         android:text="Informaatika II"
         android:textSize="18dip"
         android:textStyle="bold" />
