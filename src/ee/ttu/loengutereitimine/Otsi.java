@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class otsi extends Activity {
+public class Otsi extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- 
-        TextView textview = new TextView(this);
-        textview.setText("Siin me otsime");
-        setContentView(textview);
+        setContentView(R.layout.otsi_layout);
+        
+//        TextView textview = new TextView(this);
+//        textview.setText("Siin me otsime");
+//        setContentView(textview);
     }
 }

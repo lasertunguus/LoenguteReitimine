@@ -20,22 +20,22 @@ public class MainActivity extends TabActivity{
 		// Set up the action bar to show tabs.	 
 		TabHost tabHost = getTabHost(); 
 
-		Intent intentOtsi = new Intent().setClass(this, otsi.class);
+		Intent intentOtsi = new Intent().setClass(this, Otsi.class);
 		TabSpec otsi = tabHost
-		  .newTabSpec("Otsi")
+		  .newTabSpec("Otsing")
 		  .setContent(intentOtsi);
-		otsi.setIndicator("Otsi");
+		otsi.setIndicator("Otsing");
 		
-		Intent intentLoppenud = new Intent().setClass(this, oppekavad.class);
+		Intent intentLoppenud = new Intent().setClass(this, TanaLoppenud.class);
 		TabSpec oppekavad = tabHost
 		  .newTabSpec("Täna lõppenud")
 		  .setContent(intentLoppenud);
 		oppekavad.setIndicator("Täna lõppenud");
 		
-		tabHost.addTab(otsi);
 		tabHost.addTab(oppekavad);
+		tabHost.addTab(otsi);
 		
-		tabHost.setCurrentTab(1);
+		tabHost.setCurrentTab(0);
 	}
 
 	}

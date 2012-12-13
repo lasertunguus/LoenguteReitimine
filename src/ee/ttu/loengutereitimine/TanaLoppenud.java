@@ -12,10 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class oppekavad extends Activity{
+public class TanaLoppenud extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- 
+        setContentView(R.layout.tana_loppenud_layout);
+        
 		ListView listView = (ListView) findViewById(R.id.mylist);
 		ListAdapter listAdapter = createAdapter();
 		listView.setAdapter(listAdapter);
@@ -31,9 +32,9 @@ public class oppekavad extends Activity{
 				}
 
 				String aine = ((TextView)view).getText().toString();
-				Toast.makeText(getApplicationContext(),
-						"Õppekava " + aine , Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(getApplicationContext(),
+//						"Õppekava " + aine , Toast.LENGTH_SHORT)
+//						.show();
 			
 			}
 		});
@@ -42,10 +43,10 @@ public class oppekavad extends Activity{
 	protected ListAdapter createAdapter()
     {
     	// Create some mock data
-    	String[] oppekavad = new String[] { "IABB-51", "IAPB-51", "IABB-52"};
+    	String[] loengud = new String[] { "Matemaatiline analüüs I", "Informaatika I", "Võrgurakendused II"};
  
     	// Create a simple array adapter (of type string) with the test values
-    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, oppekavad);
+    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, loengud);
  
     	return adapter;
     }
