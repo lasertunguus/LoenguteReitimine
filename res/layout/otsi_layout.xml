@@ -8,7 +8,9 @@
         android:text="Vali päev"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="15dip" />
+        android:padding="15dip"
+        android:textSize="24sp"
+      	android:textStyle="bold"  />
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -46,16 +48,17 @@
             android:layout_height="wrap_content"
             android:text="@string/radio_button_friday" />
     </RadioGroup>
+
 	<RelativeLayout
-	android:orientation="horizontal" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="Otsi" />
-    
+		android:orientation="horizontal" 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    <Button
+	        android:id="@+id/button1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:text="Otsi" />
+	    
 	</RelativeLayout>
 </LinearLayout>
