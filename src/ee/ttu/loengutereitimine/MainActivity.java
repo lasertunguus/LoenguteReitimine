@@ -8,16 +8,21 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import ee.ttu.loengutereitimine.Helper.Query;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
 	static Helper helper = new Helper();
+	static Query queryFinished, queryOngoing;
+	static boolean connectivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		connectivity = checkConnectivity();
 
 		// Set up the action bar to show tabs.
 		TabHost tabHost = getTabHost();
@@ -36,12 +41,6 @@ public class MainActivity extends TabActivity {
 		tabHost.addTab(otsi);
 
 		tabHost.setCurrentTab(0);
-
-		if (checkConnectivity()) {
-			// ilmselt tuleb onPause ja onResume meetodites lõimede olekut muuta
-			((helper).new Query()).execute("recent");
-			((helper).new Query()).execute("recent?ongoing=true");
-		}
 	}
 
 	public boolean checkConnectivity() {

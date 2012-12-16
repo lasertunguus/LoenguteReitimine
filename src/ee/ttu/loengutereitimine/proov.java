@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
 
@@ -32,8 +30,7 @@ public class proov extends Activity {
 			lecture = null;
 		}
 
-		AsyncTask<String, Void, String[]> task = ((new Helper()).new Query())
-				.execute("comments?key=" + lecture.getKey());
+		MainActivity.helper.new Query(null).execute("comments?key=" + lecture.getKey());
 
 		final RatingBar rBar = (RatingBar) findViewById(R.id.ratingBar1);
 		rBar.setOnClickListener(new OnClickListener() {
@@ -42,7 +39,8 @@ public class proov extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int rating = (int) rBar.getRating();
-				((new Helper()).new Query()).execute("rate?key="
+				MainActivity.helper.new Query((ListView) v.getParent())
+						.execute("rate?key="
 						+ lecture.getKey() + "&rating="
 						+ Integer.toString(rating));
 				rBar.setClickable(false);
@@ -64,10 +62,10 @@ public class proov extends Activity {
 			commentList.add(commentMap);
 		}
 
-		if (task.getStatus() == AsyncTask.Status.FINISHED) {
-			((ProgressBar) findViewById(R.id.progressBar1))
-					.setVisibility(View.GONE);
-		}
+		// if (task.getStatus() == AsyncTask.Status.FINISHED) {
+		// ((ProgressBar) findViewById(R.id.progressBar1))
+		// .setVisibility(View.GONE);
+		// }
 
 		final ListView listView = (ListView) findViewById(R.id.kommentaarid);
 		ListAdapter listAdapter = new SimpleAdapter(this, commentList,

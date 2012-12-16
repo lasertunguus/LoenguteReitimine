@@ -9,9 +9,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 /**
  * @author taavi
@@ -35,7 +40,7 @@ public class Helper {
 		HttpURLConnection conn = null;
 		BufferedReader br = null;
 		int responseCode = 0;
-		String line = null, response = null;
+		String line = "", response = "";
 		try {
 			conn = (HttpURLConnection) new URL(APPENGINE_PAGE + query)
 					.openConnection();
@@ -46,7 +51,7 @@ public class Helper {
 				br = new BufferedReader(new InputStreamReader(
 						conn.getInputStream()));
 				while ((line = br.readLine()) != null)
-					response += line;
+					response += line + "\n";
 				// } else if (responseCode ==
 				// HttpURLConnection.HTTP_BAD_REQUEST) {
 				// // TODO
@@ -62,13 +67,14 @@ public class Helper {
 			if (br != null)
 				br.close();
 		}
-		return new ResponseObject(responseCode, response);
+		return MainActivity.helper.new ResponseObject(responseCode, response);
 	}
 
-	private static class ResponseObject {
+	private class ResponseObject {
 
 		private final int responseCode;
 		private final String responseText;
+		private String actionName;
 
 		private ResponseObject(int responseCode, String responseText) {
 			this.responseCode = responseCode;
@@ -83,20 +89,28 @@ public class Helper {
 			return responseText;
 		}
 
+		public void setActionName(String actionName) {
+			this.actionName = actionName;
+		}
+
+		public String getActionName() {
+			return actionName;
+		}
+
 	}
 
-	public class Query extends AsyncTask<String, Void, String[]> {
+	public class Query extends AsyncTask<String, Void, ResponseObject> {
 
-		// private final ListView listView;
-		// private final Context context;
+		private final ListView listView;
+		private final Context context;
 
-		// public Query(ListView listView) {
-		// this.listView = listView;
-		// this.context = listView.getContext();
-		// }
+		public Query(ListView listView) {
+			this.listView = listView;
+			this.context = listView.getContext();
+		}
 
 		@Override
-		protected String[] doInBackground(String... params) {
+		protected ResponseObject doInBackground(String... params) {
 			// TODO
 			// Võimalikud tegevused: * get hiljuti lõppenud loengud
 			// * get täna lõppenud loengud
@@ -119,13 +133,16 @@ public class Helper {
 					if (p.substring(0, 6).equals("recent")) { // tänased loengud
 						s = ro.getResponseText().split("\n");
 						List<Lecture> lectures = new ArrayList<Lecture>();
+						ro.setActionName("finished");
 						for (String ss : s) {
 							lectures.add(new Lecture(ss.split(";")));
 						}
-						if (query.split("=")[0].equals("ongoing")
-								&& query.split("=")[1].equals("true")) {
+						if (query.length() > 0
+								&& query.split("=")[0].equals("ongoing")
+								&& !query.split("=")[1].equals("0")) {
 							data.getOngoingLectureList().clear();
 							data.getOngoingLectureList().addAll(lectures);
+							ro.setActionName("ongoing");
 						} else {
 							data.getFinishedLectureList().clear();
 							data.getFinishedLectureList().addAll(lectures);
@@ -138,6 +155,7 @@ public class Helper {
 						}
 						data.getComments().clear();
 						data.getComments().addAll(comments);
+						ro.setActionName("comments");
 					} else if (p.substring(0, 4).equals("rate")) {
 						// TODO Siin pole midagi vaja teha. Kustuta!
 					}
@@ -145,47 +163,49 @@ public class Helper {
 			} catch (IOException e) {
 				// TODO
 			}
-			return s;
+			return ro;
 		}
 
-		// @Override
-		// protected void onPostExecute(String[] result) {
-		// // TODO Auto-generated method stub
-		// if (result != null)
-		// listView.setAdapter(new ArrayAdapter<String>(context,
-		// android.R.layout.simple_list_item_1,
-		// android.R.id.text1, result));
-		// }
+		@Override
+		protected void onPostExecute(ResponseObject result) {
+			// super.onPostExecute(result);
+			String actionName = result.getActionName();
+			ListAdapter listAdapter = createAdapter(context, actionName);
+			listView.setAdapter(listAdapter);
+		}
 
-		// Uses AsyncTask to create a task away from the main UI thread. This
-		// task
-		// takes a
-		// URL string and uses it to create an HttpUrlConnection. Once the
-		// connection
-		// has been established, the AsyncTask downloads the contents of the
-		// webpage
-		// as
-		// an InputStream. Finally, the InputStream is converted into a string,
-		// which is
-		// displayed in the UI by the AsyncTask's onPostExecute method.
-		// private class DownloadWebpageText extends AsyncTask {
-		//
-		// @Override
-		// protected String doInBackground(String... urls) {
-		//
-		// // params comes from the execute() call: params[0] is the url.
-		// try {
-		// return downloadUrl(urls[0]);
-		// } catch (IOException e) {
-		// return "Unable to retrieve web page. URL may be invalid.";
-		// }
-		// }
-		// // // onPostExecute displays the results of the AsyncTask.
-		// // @Override
-		// // protected void onPostExecute(String result) {
-		// // textView.setText(result);
-		// // }
-		// // }
-		// }
+	}
+
+	protected ListAdapter createAdapter(Context context, String actionName) {
+
+		DataSingleton data = DataSingleton.getInstance();
+		List<Lecture> loenguteList;
+		ArrayList<HashMap<String, String>> loengud;
+
+		if (actionName.equals("finished")) {
+			loenguteList = data.getFinishedLectureList();
+		} else if (actionName.equals("ongoing")) {
+			loenguteList = data.getOngoingLectureList();
+		} else { // see ei tohiks juhtuda isegi maailmalõpu korral
+			return null;
+		} // aga siia tuleb veel kommentaaride kohta
+
+		loengud = new ArrayList<HashMap<String, String>>(loenguteList.size());
+		HashMap<String, String> map;
+
+		for (Lecture l : loenguteList) {
+			map = new HashMap<String, String>(5); // suuruse panen kohe
+			map.put("oppeaine", l.getName());
+			map.put("ainekood", l.getCode());
+			map.put("oppejoud", l.getLecturer());
+			map.put("kellaaeg", l.getTimeStart() + "-" + l.getTimeEnd());
+			map.put("reiting", Float.toString(l.getRating()));
+			loengud.add(map);
+		}
+
+		return new SimpleAdapter(context, loengud, R.layout.oppeaine,
+				new String[] { "oppeaine", "ainekood", "oppejoud", "kellaaeg",
+						"reiting" }, new int[] { R.id.oppeaine, R.id.ainekood,
+						R.id.oppejoud, R.id.kellaaeg, R.id.reiting });
 	}
 }
