@@ -53,7 +53,7 @@ public class Helper {
 				// } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND)
 				// {
 				// // TODO
-				return new ResponseObject(responseCode, response.trim());
+				response = response == null ? null : response.trim();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +62,7 @@ public class Helper {
 			if (br != null)
 				br.close();
 		}
-		return null;
+		return new ResponseObject(responseCode, response);
 	}
 
 	private static class ResponseObject {
@@ -107,12 +107,14 @@ public class Helper {
 			ResponseObject ro = null;
 			try {
 				String p = params[0];
-				String query = params[0].split("?") != null ? params[0]
-						.split("?")[1] : null;
+				String query = p.split("\\?")[0].equals(p) ? ""
+						: p.split("\\?")[1];
 				ro = getContent(p);
 				if (ro.getResponseCode() != HttpURLConnection.HTTP_BAD_REQUEST
-						&& ro.getResponseCode() != HttpURLConnection.HTTP_BAD_METHOD 
-						&& ro.getResponseText().length() > 0 && !ro.getResponseText().equals("")) {
+						&& ro.getResponseCode() != HttpURLConnection.HTTP_BAD_METHOD
+						&& ro.getResponseText() != null
+						&& ro.getResponseText().length() > 0
+						&& !ro.getResponseText().equals("")) {
 					DataSingleton data = DataSingleton.getInstance();
 					if (p.substring(0, 6).equals("recent")) { // tänased loengud
 						s = ro.getResponseText().split("\n");

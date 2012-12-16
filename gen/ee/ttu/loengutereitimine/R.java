@@ -20,7 +20,7 @@ public final class R {
         public static final int kellaaeg=0x7f070004;
         public static final int kellaaegLisatud=0x7f070000;
         public static final int kommentaar=0x7f070001;
-        public static final int listView1=0x7f07000a;
+        public static final int kommentaarid=0x7f07000a;
         public static final int menu_settings=0x7f070014;
         public static final int mylist=0x7f070012;
         public static final int mylist2=0x7f070013;
@@ -33,8 +33,8 @@ public final class R {
         public static final int radio3=0x7f07000f;
         public static final int radio4=0x7f070010;
         public static final int radioGroup1=0x7f07000b;
-        public static final int rating=0x7f070002;
         public static final int ratingBar1=0x7f070007;
+        public static final int reiting=0x7f070002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

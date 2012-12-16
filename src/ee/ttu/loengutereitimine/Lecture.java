@@ -16,8 +16,8 @@ class Lecture {
 		this.type = s[3];
 		this.lecturer = s[4];
 		this.day = Short.parseShort(s[5]);
-		this.timeStart = s[6];
-		this.timeEnd = s[7];
+		this.timeStart = s[6].substring(0, 5); // sekundid ei koti
+		this.timeEnd = s[7].substring(0, 5);
 		this.description = s[8];
 		this.rating = Float.parseFloat(s[9]);
 		this.nrOfRatings = Short.parseShort(s[10]);

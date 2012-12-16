@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
@@ -68,9 +69,11 @@ public class proov extends Activity {
 					.setVisibility(View.GONE);
 		}
 
-		ListAdapter adapter = new SimpleAdapter(this, commentList,
-				R.layout.oppeaine, new String[] { "kellaaeg", "kommentaar" },
+		final ListView listView = (ListView) findViewById(R.id.kommentaarid);
+		ListAdapter listAdapter = new SimpleAdapter(this, commentList,
+				R.layout.kommentaar, new String[] { "kellaaeg", "kommentaar" },
 				new int[] { R.id.kellaaegLisatud, R.id.kommentaar });
+		listView.setAdapter(listAdapter);
 
 		// TextView textview = new TextView(this);
 		// textview.setText("Siin me otsime");

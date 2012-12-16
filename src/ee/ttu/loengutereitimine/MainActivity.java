@@ -12,6 +12,8 @@ import android.widget.TabHost.TabSpec;
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
+	static Helper helper = new Helper();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,6 +22,7 @@ public class MainActivity extends TabActivity {
 		// Set up the action bar to show tabs.
 		TabHost tabHost = getTabHost();
 
+		// 'Täna lõppenud' asemel 'Tänased'?
 		Intent intentLoppenud = new Intent().setClass(this, TanaLoppenud.class);
 		TabSpec oppekavad = tabHost.newTabSpec("Täna lõppenud").setContent(
 				intentLoppenud);
@@ -33,6 +36,12 @@ public class MainActivity extends TabActivity {
 		tabHost.addTab(otsi);
 
 		tabHost.setCurrentTab(0);
+
+		if (checkConnectivity()) {
+			// ilmselt tuleb onPause ja onResume meetodites lõimede olekut muuta
+			((helper).new Query()).execute("recent");
+			((helper).new Query()).execute("recent?ongoing=true");
+		}
 	}
 
 	public boolean checkConnectivity() {
