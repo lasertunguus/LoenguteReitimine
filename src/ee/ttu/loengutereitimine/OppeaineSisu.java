@@ -1,8 +1,5 @@
 package ee.ttu.loengutereitimine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class OppeaineSisu extends Activity {
 
@@ -60,32 +57,21 @@ public class OppeaineSisu extends Activity {
 				rBar.setIsIndicator(true);
 			}
 		});
-		
-		ArrayList<HashMap<String, String>> loeng = new ArrayList<HashMap<String, String>>(1);
-		
-		HashMap<String, String> loengMap = new HashMap<String, String>();
-		loengMap.put("oppeaine", lecture.getName());
-		loengMap.put("ainekood", lecture.getCode());
-		loengMap.put("oppejoud", lecture.getLecturer());
-		loengMap.put("tuup", lecture.getType());
-		loengMap.put("kellaaeg", lecture.getTimeStart() + "-" + lecture.getTimeEnd());
-		loengMap.put("reiting", Float.toString(lecture.getRating()));
-		loengMap.put("kirjeldus", lecture.getDescription());
-		loengMap.put("kodulehekulg", lecture.getHomepage());
-		loengMap.put("reitingute_arv",
-				Integer.toString(lecture.getNrOfRatings()));
-		// @id/reitingute_arv
-		loeng.add(loengMap);
 
-		new SimpleAdapter(this, loeng, R.layout.oppeaine_layout, new String[] {
-				"oppeaine", "ainekood", "oppejoud", "tuup", "kellaaeg",
-				"reiting", "kirjeldus", "kodulehekulg", "reitingute_arv" },
-				new int[] { R.id.oppeaine, R.id.ainekood, R.id.oppejoud,
-						R.id.tuup, R.id.kellaaeg, R.id.reiting, R.id.kirjeldus,
-						R.id.kodulehekulg, R.id.reitingute_arv });
+		((TextView) findViewById(R.id.oppeaine)).setText(lecture.getName());
+		((TextView) findViewById(R.id.ainekood)).setText(lecture.getCode());
+		((TextView) findViewById(R.id.oppejoud)).setText(lecture.getLecturer());
+		((TextView) findViewById(R.id.tuup)).setText(lecture.getType());
+		((TextView) findViewById(R.id.kellaaeg)).setText(lecture.getTimeStart()
+				+ "-" + lecture.getTimeEnd());
+		((TextView) findViewById(R.id.reiting)).setText(Float.toString(lecture
+				.getRating()));
+		((TextView) findViewById(R.id.kirjeldus)).setText(lecture
+				.getDescription());
+		((TextView) findViewById(R.id.kodulehekulg)).setText(lecture
+				.getHomepage());
+		((TextView) findViewById(R.id.reitingute_arv)).setText("("
+				+ Integer.toString(lecture.getNrOfRatings()) + ")");
 
-		// TextView textview = new TextView(this);
-		// textview.setText("Siin me otsime");
-		// setContentView(textview);
 	}
 }
