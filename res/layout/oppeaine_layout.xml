@@ -75,7 +75,7 @@
         android:textSize="15dip" />
 	
     <TextView
-	    android:id="@+id/oppeaine_tuup"
+	    android:id="@+id/tuup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/oppejoud"
@@ -84,10 +84,10 @@
 	</TextView>
     
    	<TextView
-	    android:id="@+id/ruumi_number"
+	    android:id="@+id/kirjeldus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/oppeaine_tuup"
+        android:layout_below="@id/tuup"
         android:layout_marginTop="2dp"
         android:layout_alignLeft="@id/oppeaine">
 	</TextView>
@@ -96,7 +96,7 @@
 	    android:id="@+id/kodulehekulg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ruumi_number"
+        android:layout_below="@id/kirjeldus"
         android:layout_marginTop="2dp"
         android:layout_alignLeft="@id/oppeaine">
 	</TextView>
@@ -141,9 +141,7 @@
             android:ems="10"
             android:hint="@string/text_add_comment"
             android:inputType="textCapCharacters|textMultiLine"
-            android:maxLength="200" >
-
-        </EditText>
+            android:maxLength="200" />
 
     </RelativeLayout>
 

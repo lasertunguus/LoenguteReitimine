@@ -13,19 +13,6 @@
         android:textStyle="bold" />
 
     <TextView
-	    android:id="@+id/reitingute_arv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-		android:layout_below="@id/reiting"
-		android:layout_alignBaseline="@id/oppejoud"
-        android:textSize="15dip"
-        android:textStyle="bold" >
-	</TextView>
-	
-    
-    <TextView
         android:id="@+id/oppeaine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
