@@ -222,10 +222,8 @@ public class Helper {
 					loengud.add(map);
 				}
 				adapter = new SimpleAdapter(context, loengud,
-						R.layout.oppeaine,
- new String[] { "oppeaine",
-								"ainekood", "oppejoud", "tuup",
- "kellaaeg",
+						R.layout.oppeaine, new String[] { "oppeaine",
+								"ainekood", "oppejoud", "tuup", "kellaaeg",
 								"reiting" }, new int[] { R.id.oppeaine,
 								R.id.ainekood, R.id.oppejoud, R.id.tuup,
 								R.id.kellaaeg, R.id.reiting });
