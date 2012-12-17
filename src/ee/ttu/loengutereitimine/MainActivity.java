@@ -1,7 +1,9 @@
 package ee.ttu.loengutereitimine;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,23 +26,47 @@ public class MainActivity extends TabActivity {
 
 		connectivity = checkConnectivity();
 
-		// Set up the action bar to show tabs.
-		TabHost tabHost = getTabHost();
+		if (!connectivity) {
+			// 1. Instantiate an AlertDialog.Builder with its constructor
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		// 'Täna lõppenud' asemel 'Tänased'?
-		Intent intentLoppenud = new Intent().setClass(this, TanaLoppenud.class);
-		TabSpec oppekavad = tabHost.newTabSpec("Täna lõppenud").setContent(
-				intentLoppenud);
-		oppekavad.setIndicator("Täna lõppenud");
+			// 2. Chain together various setter methods to set the dialog
+			// characteristics
+			builder.setMessage("Internetiühendus puudub.").setTitle(
+					"Ühenduse viga");
+			
+			builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               // User clicked OK button
+		           }
+		       });
+			builder.setNegativeButton(R.string.cancel,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
 
-		Intent intentOtsi = new Intent().setClass(this, Otsi.class);
-		TabSpec otsi = tabHost.newTabSpec("Otsing").setContent(intentOtsi);
-		otsi.setIndicator("Otsing");
+						}
+					});
+			AlertDialog alert = builder.create();
+			alert.show();
+		} else {
+			// Set up the action bar to show tabs.
+			TabHost tabHost = getTabHost();
 
-		tabHost.addTab(oppekavad);
-		tabHost.addTab(otsi);
+			// 'Täna lõppenud' asemel 'Tänased'?
+			Intent intentLoppenud = new Intent().setClass(this,
+					TanaLoppenud.class);
+			TabSpec oppekavad = tabHost.newTabSpec("Täna lõppenud").setContent(
+					intentLoppenud);
+			oppekavad.setIndicator("Täna lõppenud");
 
-		tabHost.setCurrentTab(0);
+			Intent intentOtsi = new Intent().setClass(this, Otsi.class);
+			TabSpec otsi = tabHost.newTabSpec("Otsing").setContent(intentOtsi);
+			otsi.setIndicator("Otsing");
+
+			tabHost.addTab(oppekavad);
+			tabHost.addTab(otsi);
+			tabHost.setCurrentTab(0);
+		}
 	}
 
 	public boolean checkConnectivity() {

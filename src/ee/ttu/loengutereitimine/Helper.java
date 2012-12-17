@@ -102,12 +102,12 @@ public class Helper {
 
 	public class Query extends AsyncTask<String, Void, ResponseObject> {
 
-		private final ListView listView;
 		private final Context context;
+		private final ListView listView;
 
-		public Query(ListView listView) {
+		public Query(Context context, ListView listView) {
+			this.context = context;
 			this.listView = listView;
-			this.context = listView.getContext();
 		}
 
 		@Override
@@ -175,12 +175,12 @@ public class Helper {
 				if (actionName.equals("kommentaarid")) {
 					proov.progressBar.setVisibility(View.GONE);
 				}
-				ListAdapter listAdapter = createAdapter(context, actionName);
+				ListAdapter listAdapter = createAdapter(actionName);
 				listView.setAdapter(listAdapter);
 		}
 	}
 
-	protected ListAdapter createAdapter(Context context, String actionName) {
+		protected ListAdapter createAdapter(String actionName) {
 
 		SimpleAdapter adapter = null;
 		DataSingleton data = DataSingleton.getInstance();

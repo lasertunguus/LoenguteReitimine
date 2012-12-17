@@ -32,7 +32,7 @@ public class proov extends Activity {
 		final ListView listView = (ListView) findViewById(R.id.kommentaarid);
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
-		MainActivity.helper.new Query(listView).execute("comments?key="
+		MainActivity.helper.new Query(this, listView).execute("comments?key="
 				+ lecture.getKey());
 
 		final RatingBar rBar = (RatingBar) findViewById(R.id.ratingBar1);
@@ -43,12 +43,15 @@ public class proov extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int rating = (int) rBar.getRating();
-				MainActivity.helper.new Query((ListView) v.getParent())
+				MainActivity.helper.new Query(progressBar.getContext(),
+						listView) // context
+																		// pigem
 						.execute("rate?key="
 						+ lecture.getKey() + "&rating="
 						+ Integer.toString(rating));
 				rBar.setClickable(false);
 				rBar.onHoverChanged(false);
+				rBar.setIsIndicator(true);
 			}
 		});
 

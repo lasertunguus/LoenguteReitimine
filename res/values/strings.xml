@@ -12,5 +12,7 @@
     <string name="radio_button_friday">Reede</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

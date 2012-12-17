@@ -22,12 +22,13 @@ public class TanaLoppenud extends Activity {
 
 		if (MainActivity.connectivity) {
 			// ilmselt tuleb onPause ja onResume meetodites lõimede olekut muuta
-			(MainActivity.queryFinished = (MainActivity.helper).new Query(
+			(MainActivity.queryFinished = (MainActivity.helper).new Query(this,
 					listView)) // vb hoopis this
 					.execute("recent");
-			(MainActivity.queryOngoing = (MainActivity.helper).new Query(
+			(MainActivity.queryOngoing = (MainActivity.helper).new Query(this,
 					listView2)) // vb hoopis this
 					.execute("recent?ongoing=true");
+		} else {
 		}
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
