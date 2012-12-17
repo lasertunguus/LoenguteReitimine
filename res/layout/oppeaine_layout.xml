@@ -84,7 +84,7 @@
 	</TextView>
     
    	<TextView
-	    android:id="@+id/ruumi_number"
+	    android:id="@+id/kirjeldus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/oppeaine_tuup"
@@ -142,12 +142,7 @@
             android:ems="10"
             android:hint="@string/text_add_comment"
             android:inputType="textCapCharacters|textMultiLine"
-            android:maxLength="200" >
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/Nv
-        </EditText>
+            android:maxLength="200" />
 
     </RelativeLayout>
 
