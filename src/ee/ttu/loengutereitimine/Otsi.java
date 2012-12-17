@@ -42,7 +42,7 @@ public class Otsi extends Activity {
 					 
 			        	(MainActivity.querySearchResults = (MainActivity.helper).new Query(context,
 								listView))
-								.execute("find/day=" +radioButtonDay.getText()+ "" + "&period_nr=" +radioButtonTime+ "");
+								.execute("find/day=" +radioButtonDay.getText()+ "" + "&period_nr=" +radioButtonTime.getText()+ "");
 			        } 
 			        else{
 			        	
