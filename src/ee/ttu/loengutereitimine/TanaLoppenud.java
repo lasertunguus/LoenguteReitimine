@@ -37,7 +37,7 @@ public class TanaLoppenud extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent intent = new Intent(getApplication().getBaseContext(),
-						proov.class);
+						OppeaineSisu.class);
 				intent.putExtra("finished", true);
 				intent.putExtra("position", position);
 				startActivity(intent);
@@ -55,7 +55,7 @@ public class TanaLoppenud extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent intent = new Intent(getApplication().getBaseContext(),
-						proov.class);
+						OppeaineSisu.class);
 				intent.putExtra("ongoing", true);
 				intent.putExtra("position", position);
 				startActivity(intent);

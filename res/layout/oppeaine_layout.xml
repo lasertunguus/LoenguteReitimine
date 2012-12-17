@@ -24,7 +24,7 @@
             android:isIndicator="false"
             android:minHeight="50dp"
             android:numStars="5"
-            android:rating="3"
+            android:rating="3.576"
             android:stepSize="1" />
 
         <EditText

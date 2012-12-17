@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 
-public class proov extends Activity {
+public class OppeaineSisu extends Activity {
 
 	static protected ProgressBar progressBar;
 

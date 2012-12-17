@@ -7,11 +7,7 @@
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="15" />
-    
-    <!-- Internetikasutamine -->
-    <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="proov"></activity>
+        <activity android:name="ee.ttu.loengutereitimine.OppeaineSisu"></activity>
 		<activity android:name="ee.ttu.loengutereitimine.TanaLoppenud"></activity>
 		<activity android:name="ee.ttu.loengutereitimine.Otsi"></activity>
     </application>
