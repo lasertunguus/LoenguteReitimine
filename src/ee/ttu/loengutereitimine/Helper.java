@@ -181,8 +181,7 @@ public class Helper {
 			String actionName = result.getActionName();
 			if (actionName != null) { // kui 400, 404 või empty content
 				if (actionName.equals("kommentaarid")) {
-					OppeaineSisu.progressBar.setVisibility(View.GONE);
-					OppeaineSisu.progressBar.setClickable(false);
+					OppeaineSisu.progressBar.setVisibility(View.INVISIBLE);
 				}
 				ListAdapter listAdapter = createAdapter(actionName);
 				listView.setAdapter(listAdapter);

@@ -8,7 +8,7 @@ class Comment {
 
 	public Comment(String[] s) {
 		this.text = s[0];
-		this.date = s[1].split(".")[1];
+		this.date = s[1].split("\\.")[0];
 	}
 
 	public String getText() {

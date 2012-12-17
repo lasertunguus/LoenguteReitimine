@@ -34,6 +34,7 @@ public class OppeaineSisu extends Activity {
 		final ListView listView = (ListView) findViewById(R.id.kommentaarid);
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+		progressBar.setProgress(0);
 		MainActivity.helper.new Query(this, listView).execute("comments?key="
 				+ lecture.getKey());
 		
