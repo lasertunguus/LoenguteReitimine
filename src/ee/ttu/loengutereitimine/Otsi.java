@@ -1,6 +1,5 @@
 package ee.ttu.loengutereitimine;
 
-import ee.ttu.loengutereitimine.Helper.Query;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class Otsi extends Activity {
 				 if (MainActivity.connectivity) {
 			        	(MainActivity.querySearchResults = (MainActivity.helper).new Query(context,
 								listView))
-								.execute("find");
+								.execute("find/day=" + "" + "&period_nr=" + "");
 			        } 
 			        else{
 			        	
