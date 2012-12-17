@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class Otsi extends Activity {
 	
@@ -27,7 +29,8 @@ public class Otsi extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				 if (MainActivity.connectivity) {
+				 if (MainActivity.connectivity) {									
+					
 			        	(MainActivity.querySearchResults = (MainActivity.helper).new Query(context,
 								listView))
 								.execute("find");
