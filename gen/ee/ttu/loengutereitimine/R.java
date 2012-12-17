@@ -23,9 +23,10 @@ public final class R {
         public static final int kodulehekulg=0x7f07000a;
         public static final int kommentaar=0x7f070001;
         public static final int kommentaarid=0x7f07000f;
-        public static final int menu_settings=0x7f070021;
-        public static final int mylist=0x7f07001f;
-        public static final int mylist2=0x7f070020;
+        public static final int menu_settings=0x7f070022;
+        public static final int mylist=0x7f070020;
+        public static final int mylist2=0x7f070021;
+        public static final int mylist3=0x7f07001f;
         public static final int oppeaine=0x7f070003;
         public static final int oppejoud=0x7f070006;
         public static final int progressBar1=0x7f07000e;

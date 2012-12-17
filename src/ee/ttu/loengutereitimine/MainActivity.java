@@ -16,7 +16,7 @@ import ee.ttu.loengutereitimine.Helper.Query;
 public class MainActivity extends TabActivity {
 
 	static Helper helper = new Helper();
-	static Query queryFinished, queryOngoing;
+	static Query queryFinished, queryOngoing, querySearchResults;
 	static boolean connectivity;
 	static MainActivity ma; // INCEPTION
 
