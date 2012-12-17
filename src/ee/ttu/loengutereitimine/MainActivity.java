@@ -18,12 +18,14 @@ public class MainActivity extends TabActivity {
 	static Helper helper = new Helper();
 	static Query queryFinished, queryOngoing;
 	static boolean connectivity;
+	static MainActivity ma; // INCEPTION
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		ma = this;
 		connectivity = checkConnectivity();
 
 		if (!connectivity) {
@@ -37,13 +39,13 @@ public class MainActivity extends TabActivity {
 			
 			builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		               // User clicked OK button
+							ma.recreate();
 		           }
 		       });
 			builder.setNegativeButton(R.string.cancel,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-
+							ma.finish();
 						}
 					});
 			AlertDialog alert = builder.create();
