@@ -16,6 +16,8 @@
 	<string name="text_choose_time">Vali aeg</string>
 	<string name="button_text_search">Otsi</string>
     <string name="retry">Retry</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Cancel</string>text_lisa_kommentaartext_lisa_kommentaar
+    <string name="text_add_comment">Lisa kommentaar</string>
+    <string name="text_add_rating">ANNA REITING</string>
 
 </resources>

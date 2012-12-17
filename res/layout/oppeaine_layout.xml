@@ -6,27 +6,131 @@
     android:scrollbarStyle="insideOverlay"
     android:scrollbars="vertical" >
 
+    <!--
     <include
         android:layout_width="wrap_content"
         android:layout_height="77dp"
         layout="@layout/oppeaine"
         android:nextFocusDown="@id/reiting" />
+	-->
+	<RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	>
+	<TextView
+        android:id="@+id/reiting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+		android:layout_alignBaseline="@+id/oppeaine"
+        android:textSize="28dip"
+        android:textStyle="bold" />
+	
+	<TextView
+	    android:id="@+id/reitingute_arv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+		android:layout_below="@id/reiting"
+		android:layout_alignBaseline="@id/oppejoud"
+        android:textSize="15dip"
+        android:textStyle="bold" >
+	</TextView>
+	
+    <TextView
+        android:id="@+id/oppeaine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kellaaeg"
+        android:layout_marginTop="2dp"
+        android:layout_alignLeft="@id/kellaaeg"
+        android:layout_toLeftOf="@id/reiting"
+        android:textSize="18dip"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/ainekood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+		android:layout_alignBaseline="@id/oppeaine"
+		android:layout_marginLeft="5dp"
+        android:textSize="15dip" />
+
+    <TextView
+        android:id="@+id/oppejoud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/oppeaine"
+        android:layout_marginTop="2dp"
+        android:layout_alignLeft="@id/oppeaine"/>
+
+    <TextView
+        android:id="@+id/kellaaeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/ainekood"
+        android:textSize="15dip" />
+	
+    <TextView
+	    android:id="@+id/oppeaine_tuup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/oppejoud"
+        android:layout_marginTop="2dp"
+        android:layout_alignLeft="@id/oppeaine">
+	</TextView>
+    
+   	<TextView
+	    android:id="@+id/ruumi_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/oppeaine_tuup"
+        android:layout_marginTop="2dp"
+        android:layout_alignLeft="@id/oppeaine">
+	</TextView>
+	
+   	<TextView
+	    android:id="@+id/kodulehekulg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ruumi_number"
+        android:layout_marginTop="2dp"
+        android:text="www.ttu.ee"
+        android:layout_alignLeft="@id/oppeaine">
+	</TextView>
+    
+	</RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="118dp" >
-
+        android:layout_height="wrap_content" >
+		
+        <TextView
+        android:id="@+id/text_add_rating"    
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/text_add_rating" 
+        android:textSize="17dip"
+        android:textStyle="bold"          
+        >
+            
+        </TextView>    
+        
         <RatingBar
             android:id="@+id/ratingBar1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_below="@id/text_add_rating"
             android:isIndicator="false"
             android:minHeight="50dp"
             android:numStars="5"
-            android:rating="3.576"
-            android:stepSize="1" />
+            android:rating="3.5"
+            android:stepSize="0.5" />
 
         <EditText
             android:id="@+id/editText1"
@@ -34,13 +138,12 @@
             android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/ratingBar1"
+            android:layout_below="@id/ratingBar1"
             android:ems="10"
-            android:hint="Lisa kommentaar"
+            android:hint="@string/text_add_comment"
             android:inputType="textCapCharacters|textMultiLine"
             android:maxLength="200" >
 
-            <requestFocus />
         </EditText>
 
     </RelativeLayout>
