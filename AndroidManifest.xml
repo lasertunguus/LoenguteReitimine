@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="proov"></activity>
+        <activity android:name="ee.ttu.loengutereitimine.OppeaineSisu"></activity>
 		<activity android:name="ee.ttu.loengutereitimine.TanaLoppenud"></activity>
 		<activity android:name="ee.ttu.loengutereitimine.Otsi"></activity>
     </application>
