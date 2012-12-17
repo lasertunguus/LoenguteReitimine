@@ -9,7 +9,8 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="77dp"
-        layout="@layout/oppeaine" />
+        layout="@layout/oppeaine"
+        android:nextFocusDown="@id/reiting" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +36,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/ratingBar1"
             android:ems="10"
-            android:focusable="false"
             android:hint="Lisa kommentaar"
             android:inputType="textCapCharacters|textMultiLine"
             android:maxLength="200" >

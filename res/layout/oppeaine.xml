@@ -19,6 +19,7 @@
         android:layout_below="@+id/kellaaeg"
         android:layout_marginTop="2dp"
         android:layout_alignLeft="@id/kellaaeg"
+        android:layout_toLeftOf="@id/reiting"
         android:textSize="18dip"
         android:textStyle="bold" />
 
