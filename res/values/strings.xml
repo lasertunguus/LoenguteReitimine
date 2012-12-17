@@ -7,15 +7,16 @@
     <string name="radio_button_wednesday">Kolmapäev</string>
     <string name="radio_button_thursday">Neljapäev</string>
     <string name="radio_button_friday">Reede</string>
-	<string name="radio_button_8to10">8&#8211;10</string>
-	<string name="radio_button_10to12">10&#8211;12</string>
-	<string name="radio_button_12to14">12&#8211;14</string>
-	<string name="radio_button_14to16">14&#8211;16</string>
-	<string name="radio_button_16to18">16&#8211;18</string>
+	<string name="radio_button_8to10">08:00&#8211;10:00</string>
+	<string name="radio_button_10to12">10:00&#8211;12:00</string>
+	<string name="radio_button_12to14">12:00&#8211;14:00</string>
+	<string name="radio_button_14to16">14:00&#8211;16:00</string>
+	<string name="radio_button_16to18">16:00&#8211;18:00</string>
 	<string name="text_choose_day">Vali päev</string>
 	<string name="text_choose_time">Vali aeg</string>
 	<string name="button_text_search">Otsi</string>
     <string name="retry">Retry</string>
     <string name="cancel">Cancel</string>
+    <string name="menu_settings">Menu settings</string>
 
 </resources>

@@ -39,8 +39,6 @@
             android:hint="Lisa kommentaar"
             android:inputType="textCapCharacters|textMultiLine"
             android:maxLength="200" >
-
-            <requestFocus />
         </EditText>
 
     </RelativeLayout>
