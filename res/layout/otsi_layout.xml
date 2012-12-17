@@ -142,4 +142,14 @@
     
 	
     </LinearLayout>
+    
+    
+    <ListView
+	    android:id="@+id/mylist3"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:footerDividersEnabled="true"
+	    android:headerDividersEnabled="true"
+	    android:scrollbarStyle="insideOverlay" >
+    </ListView>    
 </LinearLayout>

@@ -98,7 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ruumi_number"
         android:layout_marginTop="2dp"
-        android:text="www.ttu.ee"
         android:layout_alignLeft="@id/oppeaine">
 	</TextView>
     
