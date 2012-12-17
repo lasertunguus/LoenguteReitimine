@@ -30,9 +30,19 @@ public class Otsi extends Activity {
 				
 				 if (MainActivity.connectivity) {									
 					
+					 	RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1); 					 					
+						int selectedButton = radioGroup.getCheckedRadioButtonId();					 
+						RadioButton radioButtonDay = (RadioButton) findViewById(selectedButton);					 					
+						
+						
+						RadioGroup radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2); 					 					
+						int selectedButton2 = radioGroup.getCheckedRadioButtonId();					 
+						RadioButton radioButtonTime = (RadioButton) findViewById(selectedButton2);					 					
+						radioButtonDay.getText();
+					 
 			        	(MainActivity.querySearchResults = (MainActivity.helper).new Query(context,
 								listView))
-								.execute("find/day=" + "" + "&period_nr=" + "");
+								.execute("find/day=" +radioButtonDay.getText()+ "" + "&period_nr=" +radioButtonTime+ "");
 			        } 
 			        else{
 			        	
