@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string name="app_name">Loengute Reitimine</string>
     <string name="radio_button_monday">Esmaspäev</string>
     <string name="radio_button_tuesday">Teisipäev</string>
@@ -16,7 +16,6 @@
 	<string name="text_choose_time">Vali aeg</string>
 	<string name="button_text_search">Otsi</string>
     <string name="retry">Retry</string>
-    <string name="cancel">Cancel</string>
     <string name="menu_settings">Menu settings</string>
     <string name="cancel">Cancel</string>
     <string name="text_add_comment">Lisa kommentaar</string>
