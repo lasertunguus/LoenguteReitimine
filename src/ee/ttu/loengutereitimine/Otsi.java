@@ -22,10 +22,10 @@ public class Otsi extends Activity {
         listView = (ListView) findViewById(R.id.mylist3);
         btn = (Button) findViewById(R.id.button1);
         btn.setOnClickListener( new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				 if (MainActivity.connectivity) {
 			        	(MainActivity.querySearchResults = (MainActivity.helper).new Query(context,
 								listView))

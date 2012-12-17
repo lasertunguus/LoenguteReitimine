@@ -2,17 +2,17 @@ package ee.ttu.loengutereitimine;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 public class OppeaineSisu extends Activity {
 
 	static protected ProgressBar progressBar;
 	static protected OppeaineSisu os;
+	Lecture lecture;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,7 +22,6 @@ public class OppeaineSisu extends Activity {
 
 		Bundle b = getIntent().getExtras();
 		DataSingleton data = DataSingleton.getInstance();
-		final Lecture lecture;
 		
 		if (b.getBoolean("finished")) {
 			lecture = data.getFinishedLectureList().get(b.getInt("position"));
@@ -37,24 +36,22 @@ public class OppeaineSisu extends Activity {
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		MainActivity.helper.new Query(this, listView).execute("comments?key="
 				+ lecture.getKey());
-
+		
 		final RatingBar rBar = (RatingBar) findViewById(R.id.ratingBar1);
-		rBar.setRating(lecture.getRating());
-		rBar.setOnClickListener(new OnClickListener() {
+		rBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onRatingChanged(RatingBar rBar, float arg1, boolean arg2) {
 				// TODO Auto-generated method stub
-				int rating = (int) rBar.getRating();
-				MainActivity.helper.new Query(os,
-						listView) // context
-																		// pigem
-						.execute("rate?key="
-						+ lecture.getKey() + "&rating="
-						+ Integer.toString(rating));
+				rBar.setRating((int) rBar.getRating());
 				rBar.setClickable(false);
 				rBar.onHoverChanged(false);
 				rBar.setIsIndicator(true);
+				MainActivity.helper.new Query(os, null).execute("rate?key="
+						+ lecture.getKey() + "&rating="
+						+ Integer.toString((int) rBar.getRating()));
+				((TextView) findViewById(R.id.text_add_rating))
+						.setText("REITING ANTUD!");
 			}
 		});
 

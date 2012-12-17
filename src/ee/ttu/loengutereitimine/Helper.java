@@ -162,7 +162,7 @@ public class Helper {
 					} else if (p.substring(0, 4).equals("rate")) {
 						// TODO Siin pole midagi vaja teha. Kustuta!
 					} else if (p.substring(0, 4).equals("find")){
-						
+						// YOLO
 					}
 				}
 			} catch (IOException e) {
@@ -182,6 +182,7 @@ public class Helper {
 			if (actionName != null) { // kui 400, 404 või empty content
 				if (actionName.equals("kommentaarid")) {
 					OppeaineSisu.progressBar.setVisibility(View.GONE);
+					OppeaineSisu.progressBar.setClickable(false);
 				}
 				ListAdapter listAdapter = createAdapter(actionName);
 				listView.setAdapter(listAdapter);
@@ -228,20 +229,22 @@ public class Helper {
 								R.id.ainekood, R.id.oppejoud, R.id.tuup,
 								R.id.kellaaeg, R.id.reiting });
 			} else if (actionName.equals("comments")) {
-				kommentaarid = new ArrayList<HashMap<String, String>>(
-						kommentaarideList.size());
-				// let's populate dis
-				for (Comment c : kommentaarideList) {
-					map = new HashMap<String, String>(2);
-					map.put("kellaaeg", c.getDate());
-					map.put("kommentaar", c.getText());
-					kommentaarid.add(map);
-				}
+				if (kommentaarideList.size() > 0) {
+					kommentaarid = new ArrayList<HashMap<String, String>>(
+							kommentaarideList.size());
+					// let's populate dis
+					for (Comment c : kommentaarideList) {
+						map = new HashMap<String, String>(2);
+						map.put("kellaaeg", c.getDate());
+						map.put("kommentaar", c.getText());
+						kommentaarid.add(map);
+					}
 
-				adapter = new SimpleAdapter(context, kommentaarid,
-						R.layout.kommentaar, new String[] { "kellaaeg",
-								"kommentaar" }, new int[] {
-								R.id.kellaaegLisatud, R.id.kommentaar });
+					adapter = new SimpleAdapter(context, kommentaarid,
+							R.layout.kommentaar, new String[] { "kellaaeg",
+									"kommentaar" }, new int[] {
+									R.id.kellaaegLisatud, R.id.kommentaar });
+				}
 			}
 
 			return adapter;
