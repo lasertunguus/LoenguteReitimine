@@ -11,6 +11,7 @@ class DataSingleton {
 	private static List<Lecture> finished = null;
 	private static List<Lecture> ongoing = null;
 	private static List<Comment> comments = null;
+	private static List<Lecture> searchResults = null;
 
 	private DataSingleton() {
 	}
@@ -39,4 +40,10 @@ class DataSingleton {
 			comments = new ArrayList<Comment>();
 		return comments;
 	}
+	
+	public List<Lecture> getSearchResults(){
+		if(searchResults== null)
+		searchResults = new ArrayList<Lecture>();
+		return searchResults;
+	}	
 }

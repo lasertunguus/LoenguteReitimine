@@ -124,6 +124,7 @@ public class Helper {
 				String p = params[0];
 				String query = p.split("\\?")[0].equals(p) ? ""
 						: p.split("\\?")[1];
+				
 				ro = getContent(p);
 				if (ro.getResponseCode() != HttpURLConnection.HTTP_BAD_REQUEST
 						&& ro.getResponseCode() != HttpURLConnection.HTTP_BAD_METHOD) {
@@ -160,6 +161,8 @@ public class Helper {
 						}
 					} else if (p.substring(0, 4).equals("rate")) {
 						// TODO Siin pole midagi vaja teha. Kustuta!
+					} else if (p.substring(0, 4).equals("find")){
+						
 					}
 				}
 			} catch (IOException e) {
