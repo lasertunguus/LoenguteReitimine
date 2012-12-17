@@ -14,6 +14,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -170,42 +171,71 @@ public class Helper {
 		protected void onPostExecute(ResponseObject result) {
 			// super.onPostExecute(result);
 			String actionName = result.getActionName();
-			ListAdapter listAdapter = createAdapter(context, actionName);
-			listView.setAdapter(listAdapter);
+			if (actionName != null) { // kui 400, 404 või empty content
+				if (actionName.equals("kommentaarid")) {
+					proov.progressBar.setVisibility(View.GONE);
+				}
+				ListAdapter listAdapter = createAdapter(context, actionName);
+				listView.setAdapter(listAdapter);
 		}
-
 	}
 
 	protected ListAdapter createAdapter(Context context, String actionName) {
 
+		SimpleAdapter adapter = null;
 		DataSingleton data = DataSingleton.getInstance();
-		List<Lecture> loenguteList;
-		ArrayList<HashMap<String, String>> loengud;
+		List<Lecture> loenguteList = null;
+		List<Comment> kommentaarideList = null;
+		ArrayList<HashMap<String, String>> loengud, kommentaarid;
 
 		if (actionName.equals("finished")) {
 			loenguteList = data.getFinishedLectureList();
 		} else if (actionName.equals("ongoing")) {
 			loenguteList = data.getOngoingLectureList();
-		} else { // see ei tohiks juhtuda isegi maailmalõpu korral
-			return null;
-		} // aga siia tuleb veel kommentaaride kohta
-
-		loengud = new ArrayList<HashMap<String, String>>(loenguteList.size());
-		HashMap<String, String> map;
-
-		for (Lecture l : loenguteList) {
-			map = new HashMap<String, String>(5); // suuruse panen kohe
-			map.put("oppeaine", l.getName());
-			map.put("ainekood", l.getCode());
-			map.put("oppejoud", l.getLecturer());
-			map.put("kellaaeg", l.getTimeStart() + "-" + l.getTimeEnd());
-			map.put("reiting", Float.toString(l.getRating()));
-			loengud.add(map);
+		} else if (actionName.equals("comments")) {
+			kommentaarideList = data.getComments();
+		} else {
+			return null; // see ei tohiks juhtuda
+							// isegi maailmalõpu korral
 		}
 
-		return new SimpleAdapter(context, loengud, R.layout.oppeaine,
-				new String[] { "oppeaine", "ainekood", "oppejoud", "kellaaeg",
-						"reiting" }, new int[] { R.id.oppeaine, R.id.ainekood,
-						R.id.oppejoud, R.id.kellaaeg, R.id.reiting });
+		HashMap<String, String> map;
+
+		if (actionName.equals("finished") || actionName.equals("ongoing")) {
+			loengud = new ArrayList<HashMap<String, String>>(
+					loenguteList.size());
+			for (Lecture l : loenguteList) {
+				map = new HashMap<String, String>(5); // suuruse panen kohe
+				map.put("oppeaine", l.getName());
+				map.put("ainekood", l.getCode());
+				map.put("oppejoud", l.getLecturer());
+				map.put("kellaaeg", l.getTimeStart() + "-" + l.getTimeEnd());
+				map.put("reiting", Float.toString(l.getRating()));
+				loengud.add(map);
+			}
+			adapter = new SimpleAdapter(context, loengud, R.layout.oppeaine,
+					new String[] { "oppeaine", "ainekood", "oppejoud",
+							"kellaaeg", "reiting" }, new int[] { R.id.oppeaine,
+							R.id.ainekood, R.id.oppejoud, R.id.kellaaeg,
+							R.id.reiting });
+		} else if (actionName.equals("comments")) {
+			kommentaarid = new ArrayList<HashMap<String, String>>(
+					kommentaarideList.size());
+			// let's populate dis
+			for (Comment c : kommentaarideList) {
+				map = new HashMap<String, String>(2);
+				map.put("kellaaeg", c.getDate());
+				map.put("kommentaar", c.getText());
+				kommentaarid.add(map);
+			}
+
+			adapter = new SimpleAdapter(context, kommentaarid,
+					R.layout.kommentaar, new String[] { "kellaaeg",
+							"kommentaar" }, new int[] { R.id.kellaaegLisatud,
+							R.id.kommentaar });
+		}
+
+		return adapter;
 	}
+}
 }
