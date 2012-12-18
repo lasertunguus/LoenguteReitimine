@@ -77,9 +77,9 @@
 	    </RadioGroup> 
 	    
 	    <RelativeLayout
-		android:orientation="horizontal" 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content">
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
 	         
 	    <Button
 	        android:id="@+id/button1"
@@ -87,6 +87,17 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:text="@string/button_text_search" />
+
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="6dp"
+	        android:layout_toRightOf="@+id/button1"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 	    </RelativeLayout>
 		
 		</LinearLayout>
@@ -152,14 +163,15 @@
 		
 	    </LinearLayout>
 	    
-	    
 	    <ListView
-		    android:id="@+id/mylist3"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:footerDividersEnabled="true"
-		    android:headerDividersEnabled="true"
-		    android:scrollbarStyle="insideOverlay" >
+	        android:id="@+id/mylist3"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="6dp"
+	        android:footerDividersEnabled="true"
+	        android:headerDividersEnabled="true"
+	        android:scrollbarStyle="insideOverlay" >
+
 	    </ListView>
 </LinearLayout>
 </ScrollView>

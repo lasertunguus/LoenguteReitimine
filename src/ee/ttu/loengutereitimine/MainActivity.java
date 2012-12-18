@@ -16,7 +16,7 @@ import ee.ttu.loengutereitimine.Helper.Query;
 public class MainActivity extends TabActivity {
 
 	static Helper helper = new Helper();
-	static Query queryFinished, queryOngoing, querySearchResults;
+	static Query queryFinished, queryOngoing, queryFind;
 	static boolean connectivity;
 	static MainActivity ma; // INCEPTION
 
@@ -54,12 +54,11 @@ public class MainActivity extends TabActivity {
 			// Set up the action bar to show tabs.
 			TabHost tabHost = getTabHost();
 
-			// 'Täna lõppenud' asemel 'Tänased'?
 			Intent intentLoppenud = new Intent().setClass(this,
 					TanaLoppenud.class);
-			TabSpec oppekavad = tabHost.newTabSpec("Täna lõppenud").setContent(
+			TabSpec oppekavad = tabHost.newTabSpec("Tänased").setContent(
 					intentLoppenud);
-			oppekavad.setIndicator("Täna lõppenud");
+			oppekavad.setIndicator("Tänased");
 
 			Intent intentOtsi = new Intent().setClass(this, Otsi.class);
 			TabSpec otsi = tabHost.newTabSpec("Otsing").setContent(intentOtsi);
@@ -68,6 +67,7 @@ public class MainActivity extends TabActivity {
 			tabHost.addTab(oppekavad);
 			tabHost.addTab(otsi);
 			tabHost.setCurrentTab(0);
+
 		}
 	}
 

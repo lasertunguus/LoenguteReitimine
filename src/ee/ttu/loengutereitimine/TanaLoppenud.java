@@ -23,12 +23,13 @@ public class TanaLoppenud extends Activity {
 		if (MainActivity.connectivity) {
 			// ilmselt tuleb onPause ja onResume meetodites lõimede olekut muuta
 			(MainActivity.queryFinished = (MainActivity.helper).new Query(this,
-					listView)) // vb hoopis this
+					listView))
 					.execute("recent");
 			(MainActivity.queryOngoing = (MainActivity.helper).new Query(this,
-					listView2)) // vb hoopis this
+					listView2))
 					.execute("recent?ongoing=true");
 		} else {
+			return;
 		}
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -41,11 +42,6 @@ public class TanaLoppenud extends Activity {
 				intent.putExtra("finished", true);
 				intent.putExtra("position", position);
 				startActivity(intent);
-				// String aine = ((TextView)view).getText().toString();
-				// Toast.makeText(getApplicationContext(),
-				// "Õppekava " + aine , Toast.LENGTH_SHORT)
-				// .show();
-
 			}
 		});
 

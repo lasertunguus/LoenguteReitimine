@@ -4,7 +4,9 @@
 package ee.ttu.loengutereitimine;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -30,8 +32,57 @@ public class Helper {
 
 	private static final String APPENGINE_PAGE = "http://loengutereitimine.appspot.com/";
 
+	protected static ResponseObject postContent(String query, String postContent) {
+		URL url;
+		HttpURLConnection connection = null;
+		try {
+			// Create connection
+			url = new URL(APPENGINE_PAGE + query);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Content-Type",
+					"text/html; charset=utf-8");
+			connection.setRequestProperty("Content-Length",
+					Integer.toString(postContent.getBytes().length));
+			// connection.setRequestProperty("Content-Language", "en-US");
+
+			connection.setUseCaches(false);
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+
+			// Send request
+			DataOutputStream wr = new DataOutputStream(
+					connection.getOutputStream());
+			wr.write(postContent.getBytes());
+			// wr.write(postContent.getBytes().toString());
+			wr.flush();
+			wr.close();
+
+			// Get Response
+			int responseCode = connection.getResponseCode();
+			InputStream is = connection.getInputStream();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+			String line;
+			StringBuffer response = new StringBuffer();
+			while ((line = rd.readLine()) != null) {
+				response.append(line);
+				response.append('\r');
+			}
+			rd.close();
+			return MainActivity.helper.new ResponseObject(responseCode,
+					response.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MainActivity.helper.new ResponseObject(400, "");
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+	}
+
 	/**
-	 * TODO: vb ei pea synchronized olema
 	 * 
 	 * @param query
 	 * @throws IOException
@@ -64,6 +115,7 @@ public class Helper {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			// return MainActivity.helper.new ResponseObject(400, "");
 		} finally {
 			if (br != null)
 				br.close();
@@ -120,24 +172,26 @@ public class Helper {
 			// * postita loengule kommentaar
 			String[] s = null;
 			ResponseObject ro = null;
+			List<Lecture> lectures;
 			try {
 				String p = params[0];
 				String query = p.split("\\?")[0].equals(p) ? ""
 						: p.split("\\?")[1];
-				
+				if (p.startsWith("/postcomment")
+						&& OppeaineSisu.postContent.length() > 0) {
+					ro = postContent("/comments?" + query,
+							OppeaineSisu.postContent);
+					ro.setActionName("postcomment");
+					return ro;
+				}
 				ro = getContent(p);
 				if (ro.getResponseCode() != HttpURLConnection.HTTP_BAD_REQUEST
 						&& ro.getResponseCode() != HttpURLConnection.HTTP_BAD_METHOD) {
 					DataSingleton data = DataSingleton.getInstance();
 					String rText = ro.getResponseText();
-					if (p.substring(0, 6).equals("recent") && !isEmpty(rText)) { // tänased
-																					// loengud
-						s = ro.getResponseText().split("\n");
-						List<Lecture> lectures = new ArrayList<Lecture>();
+					if (p.startsWith("recent") && !isEmpty(rText)) { // tänased
+						lectures = getLecturesFromResponse(ro.getResponseText());
 						ro.setActionName("finished");
-						for (String ss : s) {
-							lectures.add(new Lecture(ss.split(";")));
-						}
 						if (query.length() > 0
 								&& query.split("=")[0].equals("ongoing")
 								&& !query.split("=")[1].equals("0")) {
@@ -148,7 +202,7 @@ public class Helper {
 							data.getFinishedLectureList().clear();
 							data.getFinishedLectureList().addAll(lectures);
 						}
-					} else if (p.substring(0, 8).equals("comments")) {
+					} else if (p.startsWith("comments")) {
 						ro.setActionName("comments");
 						data.getComments().clear();
 						if (!isEmpty(rText)) {
@@ -159,16 +213,34 @@ public class Helper {
 							}
 							data.getComments().addAll(comments);
 						}
-					} else if (p.substring(0, 4).equals("rate")) {
+					} else if (p.startsWith("find")) {
+						ro.setActionName("find");
+						data.getSearchResults().clear();
+						// YOLO #SWAG
+						if (query.length() > 0) {
+							if (!isEmpty(rText)) {
+								lectures = getLecturesFromResponse(ro
+										.getResponseText());
+								data.getSearchResults().addAll(lectures);
+							}
+						}
+					} else if (p.startsWith("rate")) {
 						// TODO Siin pole midagi vaja teha. Kustuta!
-					} else if (p.substring(0, 4).equals("find")){
-						// YOLO
 					}
 				}
 			} catch (IOException e) {
 				// TODO
 			}
 			return ro;
+		}
+
+		private List<Lecture> getLecturesFromResponse(String response) {
+			ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+			String[] s = response.split("\n");
+			for (String ss : s) {
+				lectures.add(new Lecture(ss.split(";")));
+			}
+			return lectures;
 		}
 
 		private boolean isEmpty(String s) {
@@ -182,33 +254,44 @@ public class Helper {
 			if (actionName != null) { // kui 400, 404 või empty content
 				if (actionName.equals("kommentaarid")) {
 					OppeaineSisu.progressBar.setVisibility(View.INVISIBLE);
+				} else if (actionName.equals("find")) {
+					Otsi.btn.setPressed(false);
+					Otsi.btn.setClickable(true);
+					Otsi.btn.setText("Otsi");
+					if (isEmpty(result.getResponseText())) {
+						Otsi.status.setText("Tulemusi ei leitud");
+					}
 				}
 				ListAdapter listAdapter = createAdapter(actionName);
-				listView.setAdapter(listAdapter);
+				if (listAdapter != null)
+					listView.setAdapter(listAdapter);
+
 			}
 		}
 
 		protected ListAdapter createAdapter(String actionName) {
 			SimpleAdapter adapter = null;
-			DataSingleton data = DataSingleton.getInstance();
 			List<Lecture> loenguteList = null;
 			List<Comment> kommentaarideList = null;
 			ArrayList<HashMap<String, String>> loengud, kommentaarid;
+
+			DataSingleton data = DataSingleton.getInstance();
 
 			if (actionName.equals("finished")) {
 				loenguteList = data.getFinishedLectureList();
 			} else if (actionName.equals("ongoing")) {
 				loenguteList = data.getOngoingLectureList();
+			} else if (actionName.equals("find")) {
+				loenguteList = data.getSearchResults();
 			} else if (actionName.equals("comments")) {
 				kommentaarideList = data.getComments();
 			} else {
-				return null; // see ei tohiks juhtuda
-								// isegi maailmalõpu korral
+				return null;
 			}
 
 			HashMap<String, String> map;
 
-			if (actionName.equals("finished") || actionName.equals("ongoing")) {
+			if (!actionName.equals("comments")) {
 				loengud = new ArrayList<HashMap<String, String>>(
 						loenguteList.size());
 				for (Lecture l : loenguteList) {

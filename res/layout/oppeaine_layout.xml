@@ -2,17 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:scrollbarStyle="insideOverlay"
-    android:scrollbars="vertical" >
+    android:orientation="vertical" >
 
-    <!--
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="77dp"
-        layout="@layout/oppeaine"
-        android:nextFocusDown="@id/reiting" />
-	-->
 	<RelativeLayout
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -24,6 +15,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignBaseline="@+id/oppeaine"
 	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="6dp"
 	    android:textSize="28dip"
 	    android:textStyle="bold" />
 
@@ -32,11 +24,13 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/reiting"
-	    android:layout_marginLeft="12dp"
-	    android:layout_marginRight="2dp"
-	    android:layout_marginTop="5dp"
-	    android:layout_toRightOf="@id/oppeaine"
-	    android:textSize="15dip"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="9dp"
+	    android:layout_marginTop="14dp"
+	    android:layout_alignParentRight="true"
+	    android:maxLines="1"
+	    android:text="(230)"
+	    android:textSize="13dip"
 	    android:textStyle="bold" >
 
 	</TextView>
@@ -66,13 +60,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/oppeaine"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:layout_alignLeft="@id/oppeaine"/>
 
     <TextView
         android:id="@+id/kellaaeg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/ainekood"
         android:textSize="15dip" />
@@ -91,17 +86,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tuup"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:layout_alignLeft="@id/oppeaine">
 	</TextView>
 	
    	<TextView
-	    android:id="@+id/kodulehekulg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/kirjeldus"
-        android:layout_marginTop="2dp"
-        android:layout_alignLeft="@id/oppeaine">
+   	    android:id="@+id/kodulehekulg"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignLeft="@id/oppeaine"
+   	    android:layout_below="@id/kirjeldus"
+   	    android:layout_marginTop="1dp"
+   	    android:autoLink="web" >
+
 	</TextView>
     
 	</RelativeLayout>
@@ -156,7 +153,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:clickable="false" >
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -176,9 +174,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:clickable="false"
-            android:padding="6dp"
             android:visibility="visible" >
-
         </ListView>
 
     </RelativeLayout>
